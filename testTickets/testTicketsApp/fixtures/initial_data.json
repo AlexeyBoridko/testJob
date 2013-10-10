@@ -1,0 +1,15 @@
+[{
+  "model": "testTicketsApp.UserInfo",
+  "pk": 1,
+  "fields": {
+    "name": "Alexey",
+    "surname": "Boridko",
+    "date_of_birth": "1982-01-13T15:19:03.543Z",
+    "bio": "MS, Software Engineering. Kherson State University, Ukraine",
+    "email": "my@email.com",
+    "jid": "alexey@42cc.co",
+    "skype_id": "myskype",
+    "other_contacts": "work phone number 12345678. home phone number 123456789000. Postcode 767544",
+    "contacts": "Location - Kherson"
+  }
+}]
