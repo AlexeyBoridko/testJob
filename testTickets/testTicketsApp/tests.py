@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 class SimpleTest(TestCase):
 
     fixtures = [
-        'testTicketsApp/fixtures/initial_data.json',
+        'testTickets/testTicketsApp/fixtures/initial_data.json',
         ]
 
     def test_model(self):
