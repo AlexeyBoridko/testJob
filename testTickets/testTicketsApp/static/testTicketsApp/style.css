@@ -8,6 +8,7 @@ body {
 }
 .partcontainer{
     width: 800px;
+    min-height: 250px;
 }
 
 .leftpart {

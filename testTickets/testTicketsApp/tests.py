@@ -10,11 +10,12 @@ from testTicketsApp.models import UserInfo
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 
-class SimpleTest(TestCase):
 
+class SimpleTest(TestCase):
     fixtures = [
         'testTickets/testTicketsApp/fixtures/initial_data.json',
-        ]
+    ]
+
 
     def test_model(self):
         m = UserInfo.objects.get(pk=1)

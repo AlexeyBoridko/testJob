@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>First 10 http requests</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "testTicketsApp/style.css" %}" type="text/css" media="all" />
+</head>
+<body>
+        <h1>First 10 http requests.</h1>
+        <table class="table">
+            <tr>
+                <th>Host</th>
+                <th>Path</th>
+                <th>Method</th>
+                <th>Date/Time</th>
+            </tr>
+            {% for r in requestsList %}
+                <tr>
+                    <td>{{ r.host }}</td>
+                    <td>{{ r.path }}</td>
+                    <td>{{ r.method }}</td>
+                    <td>{{ r.runtime }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+</body>
+</html>
