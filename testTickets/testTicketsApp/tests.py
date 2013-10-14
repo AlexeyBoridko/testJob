@@ -49,4 +49,17 @@ class SimpleTest(TestCase):
         self.assertContains(response, "<td>/requests/</td>")
 
 
+    def test_context_processor(self):
+        client = Client()
+        response = client.get(reverse('requests'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('django_settings' in response.context)
+        self.assertIsNotNone(response.context['django_settings'])
+
+
+
+
+
+
+
 
