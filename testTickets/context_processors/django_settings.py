@@ -1,6 +1,3 @@
-__author__ = 'alex'
-
-
 from django.conf import settings
 
 

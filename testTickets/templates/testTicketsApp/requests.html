@@ -9,6 +9,7 @@
         <h1>First 10 http requests.</h1>
         <table class="table">
             <tr>
+                <th>id</th>
                 <th>Host</th>
                 <th>Path</th>
                 <th>Method</th>
@@ -16,6 +17,7 @@
             </tr>
             {% for r in requestsList %}
                 <tr>
+                    <td>{{ r.id }}</td>
                     <td>{{ r.host }}</td>
                     <td>{{ r.path }}</td>
                     <td>{{ r.method }}</td>
@@ -23,5 +25,6 @@
                 </tr>
             {% endfor %}
         </table>
+        <h3>Items count: {{ requestsList.count }}</h3>
 </body>
 </html>

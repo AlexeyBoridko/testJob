@@ -8,6 +8,6 @@ def main(request):
     return render(request, "testTicketsApp/main.html", {'myinfo': ui})
 
 
-def RequestsView(request):
-    requestsList = MiddlewareRequests.objects.all()[:10]
-    return render(request, "testTicketsApp/requests.html", {'requestsList': requestsList})
+def requests_view(request):
+    requests_list = MiddlewareRequests.objects.all().order_by('id')[:10]
+    return render(request, "testTicketsApp/requests.html", {'requestsList': requests_list})
