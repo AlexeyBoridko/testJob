@@ -1,8 +1,4 @@
-#__author__ = 'alex'
-
-
 import os
-
 
 __all__ = ('PROJECT_ROOT', 'here', 'root', 'proj')
 

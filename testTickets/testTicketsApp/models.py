@@ -14,12 +14,8 @@ class UserInfo(models.Model):
     contacts = models.CharField(max_length=100, default="")
 
 
-    def __str__(self):
-        return self.name
-
-
 class MiddlewareRequests(models.Model):
     host = models.CharField(max_length=100, default="")
-    path =  models.CharField(max_length=255, default="")
+    path = models.CharField(max_length=255, default="")
     method = models.CharField(max_length=20, default="")
     runtime = models.DateTimeField(auto_now_add=True)
