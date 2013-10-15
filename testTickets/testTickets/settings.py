@@ -4,8 +4,7 @@ from utils import root
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+ADMINS = (    # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -13,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'testDB',                      # Or path to database file if using sqlite3.
+        'NAME': 'testDB',  # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
@@ -22,10 +21,7 @@ DATABASES = {
     }
 }
 
-
-FIXTURE_DIRS = (
-   'testTicketsApp/fixtures/',
-)
+FIXTURE_DIRS = ('testTicketsApp/fixtures/',)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -86,7 +82,7 @@ STATIC_URL = '/static/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -96,7 +92,7 @@ SECRET_KEY = '$@5pv7#2&a9rjz)y7fng#9=c-61yrm0x=u67u*(&9cpf&@16y='
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,7 +112,8 @@ ROOT_URLCONF = 'testTickets.urls'
 WSGI_APPLICATION = 'testTickets.wsgi.application'
 
 import os
-TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\','/'),)
+
+TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\', '/'),)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
