@@ -4,7 +4,7 @@ from utils import root
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (  # ('Your Name', 'your_email@example.com'),
+ADMINS = (    # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
@@ -13,6 +13,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'testDB',  # Or path to database file if using sqlite3.
+        # The following settings are not used with sqlite3:
         'USER': '',
         'PASSWORD': '',
         'HOST': '',  # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
@@ -20,9 +21,7 @@ DATABASES = {
     }
 }
 
-FIXTURE_DIRS = (
-    'testTicketsApp/fixtures/',
-)
+FIXTURE_DIRS = ('testTicketsApp/fixtures/',)
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -83,7 +82,7 @@ STATIC_URL = '/static/'
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -102,7 +101,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'testTicketsApp.requeststrackermiddleware.RequestsTrackerMiddleware',
+    'testTicketsApp.middleware.RequestsTrackerMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -115,18 +114,6 @@ WSGI_APPLICATION = 'testTickets.wsgi.application'
 import os
 
 TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'templates').replace('\\', '/'),)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-
-    "context_processors.django_settings.to_context",
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -143,6 +130,8 @@ INSTALLED_APPS = (
     'south',
 
 )
+
+SOUTH_TESTS_MIGRATE = False
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 
