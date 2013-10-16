@@ -6,9 +6,6 @@ from .models import MiddlewareRequests
 
 
 class SimpleTest(TestCase):
-    fixtures = [
-        'testTickets/testTicketsApp/fixtures/initial_data.json',
-    ]
 
     def test_model(self):
         m = UserInfo.objects.get(pk=1)
