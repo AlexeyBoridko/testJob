@@ -12,4 +12,15 @@
     "other_contacts": "work phone number 12345678. home phone number 123456789000. Postcode 767544",
     "contacts": "Location - Kherson"
   }
+},
+{
+  "model": "auth.user",
+  "pk": 100000,
+  "fields": {
+      "first_name": "Alexey",
+      "last_name": "Boridko",
+      "username": "alexey",
+      "email": "alexey@mail.com",
+      "password": "pbkdf2_sha256$10000$1upaszDvgs6m$73zdIqRzXXLHNFCsfJhDBELVgP9LT3gl/JKvZxb1IRo="
+  }
 }]

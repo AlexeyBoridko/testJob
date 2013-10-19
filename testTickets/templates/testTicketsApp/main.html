@@ -1,50 +1,71 @@
 {% extends "base.html" %}
 {% block title %}<title>My contact info</title>{% endblock %}
-{% block h1 %}<h1>42 Coffee Cups Test Assignment</h1>{% endblock %}
-
+{% block h1 %}42 Coffee Cups Test Assignment{% endblock %}
+{% block login_logout %}
+    {% if user.is_authenticated %}
+        Welcome, {{ user.username }} <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="partcontainer">
         <div class="leftpart">
             <div>
                 <div class="label">Name:</div>
-                <p>{{ myinfo.name }}</p>
+                <p>{{ my_info.name }}</p>
             </div>
             <div>
                 <div class="label">Surname:</div>
-                <p>{{ myinfo.surname}}</p>
+                <p>{{ my_info.surname}}</p>
             </div>
             <div>
                 <div class="label">Date of birth:</div>
-                <p>{{ myinfo.date_of_birth}}</p>
+                <p>{{ my_info.date_birth }}</p>
             </div>
             <div>
-                <div class="label">Bio:</div>
-                <div class="data">{{ myinfo.bio}}</div>
+                <div class="label">Photo:</div>
+                {% if my_info.photo%}
+                    <img src="{{ my_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
+                {% else %}
+                    <div class="no-photo">Photo was not uploaded yet</div>
+                {% endif %}
             </div>
+
         </div>
         <div class="rightpart">
             <div>
                 <div class="label">Contacts:</div>
-                 <p>{{ myinfo.contacts }}</p>
+                 <p>{{ my_info.contacts }}</p>
             </div>
             <div>
                 <div class="label">Email:</div>
-                <p>{{ myinfo.email}}</p>
+                <p>{{ my_info.email}}</p>
             </div>
             <div>
                 <div class="label">Jabber:</div>
-                <p>{{ myinfo.jid}}</p>
+                <p>{{ my_info.jid}}</p>
             </div>
             <div>
                 <div class="label">Skype:</div>
-                <p>{{ myinfo.skype_id}}</p>
+                <p>{{ my_info.skype_id}}</p>
             </div>
              <div>
-                <div class="label">Other contacts:</div>
-                <div class="data">{{ myinfo.other_contacts}}</div>
+                <div class="label-multiline">Other contacts:</div>
+                <div class="data-multiline">{{ my_info.other_contacts}}</div>
+            </div>
+            <div>
+                <div class="label-multiline">Bio:</div>
+                <div class="data-multiline">{{ my_info.bio}}</div>
             </div>
         </div>
     </div>
+    <div class="buttons-block-bottom">
+        {% if user.is_authenticated %}
+             <a href="{% url 'update' my_info.id %}">Edit</a>
+        {% endif %}
+    </div>
+    <hr>
     <div class="partcontainer">
         <a href="{% url 'requests' %}">requests</a>
     </div>

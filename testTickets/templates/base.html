@@ -2,11 +2,23 @@
 <head>
     {% block title %} {% endblock %}
     {% load staticfiles %}
-        <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css" media="all" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+        $(function() {
+        $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
+        });
+    </script>
     {% block header %}{% endblock %}
 </head>
 <body>
-    {% block h1 %} {% endblock %}
-    <div>{% block content %} {% endblock %}</div>
+    <div class="page_container">
+        <div class="header-line-h1">{% block h1 %} {% endblock %}</div>
+        <div class="header-line-login-logout">{% block login_logout %} {% endblock %}</div>
+        <div style="clear:both; height: 10px;"></div>
+        <div>{% block content %} {% endblock %}</div>
+    </div>
 </body>
 </html>

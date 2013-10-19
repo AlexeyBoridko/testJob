@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block title %}<title>First 10 http requests</title>{% endblock %}
-{% block h1 %}<h1>First 10 http requests.</h1>{% endblock %}
-
+{% block h1 %}First 10 http requests.{% endblock %}
+{% block login_logout %}
+    {% if user.is_authenticated %}
+        Welcome, {{ user.username }} <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+{% endblock %}
 {% block content %}
     <table class="table">
         <tr>

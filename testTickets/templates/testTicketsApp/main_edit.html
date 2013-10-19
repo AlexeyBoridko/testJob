@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}<title>My contact info</title>{% endblock %}
+{% block h1 %}42 Coffee Cups Test Assignment{% endblock %}
+{% block login_logout %}
+    {% if user.is_authenticated %}
+        Welcome, {{ user.username }} <a href="{% url 'logout' %}">Logout</a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <form enctype="multipart/form-data" method="post" action="{% url 'update' my_info.id %}">
+    {% csrf_token %}
+        <div class="partcontainer">
+            <div class="leftpart">
+                <div class="field">
+                    <label for="name_id" >Name:</label>
+                    <input id="name_id" type="text" name="name" value="{{ my_info.name }}"/>
+                    {% for r in validationError.message_dict.name%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <label for="surname_id">Surname:</label>
+                    <input id="surname_id" type="text" name="surname" value="{{ my_info.surname }}"/>
+                    {% for r in validationError.message_dict.surname%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <label for="datepicker">Date of birth:</label>
+                    <input id="datepicker" readonly="readonly" type="text" name="date_of_birth"
+                           value="{{ my_info.date_birth }}"/>
+                    {% for r in validationError.message_dict.date_of_birth%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                 <div class="field">
+                    <label for="photo_file_id">Photo:</label>
+                    <input type="file" id="photo_file_id" name="photo_file" />
+                    {% for r in validationError.message_dict.photo%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <label for="photo_id"></label>
+                    {% if my_info.photo%}
+                        <img src="{{ my_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
+                    {% else %}
+                        <div class="no-photo">Photo was not uploaded yet</div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="rightpart">
+                <div class="field">
+                    <label for="contacts_id">Contacts:</label>
+                    <input id="contacts_id" type="text" name="contacts" value="{{ my_info.contacts }}"/>
+                    {% for r in validationError.message_dict.contacts%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <label for="email_id">Email:</label>
+                    <input id="email_id" type="text" name="email" value="{{ my_info.email }}"/>
+                    {% for r in validationError.message_dict.email%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                 <div class="field">
+                    <label for="jabber_id">Jabber:</label>
+                    <input id="jabber_id" type="text" name="jid" value="{{ my_info.jid }}"/>
+                    {% for r in validationError.message_dict.jid%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field">
+                    <label for="skypeid">Skype:</label>
+                    <input id="skypeid" type="text" name="skype_id" value="{{ my_info.skype_id }}"/>
+                    {% for r in validationError.message_dict.skype_id%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field-multiline">
+                    <label for="other_id">Other contacts:</label><br/>
+                    <textarea id="other_id" rows="9" name="other_contacts"
+                              cols="48">{{ my_info.other_contacts}}</textarea>
+                    {% for r in validationError.message_dict.other_contacts%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+                <div class="field-multiline">
+                    <label for="bio_id">Bio:</label><br/>
+                    <textarea id="bio_id" rows="9" cols="48" name="bio">{{ my_info.bio}}</textarea>
+                    {% for r in validationError.message_dict.bio%}
+                        <label class="error" title="{{ r }}">*</label>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="buttons-block-bottom">
+           <input type="submit" value="Save"/>
+           <a href="{% url 'main' %}">Cancel</a>
+        </div>
+    </form>
+    <hr>
+    <div class="partcontainer">
+        <a href="{% url 'requests' %}">requests</a>
+    </div>
+{% endblock %}
