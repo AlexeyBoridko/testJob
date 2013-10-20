@@ -24,15 +24,15 @@ body {
 }
 
 .label{
-    font-size: 14px;
+    /*font-size: 14px;*/
     float: left;
     width: 100px;
-    height: 28px;
+    /*height: 28px;*/
 }
 .data{
     width: 300px;
     float: right;
-     height: 28px;
+     /*height: 28px;*/
 }
 .data input{
     width: 252px;
@@ -40,7 +40,7 @@ body {
 
 .field{
     width: 356px;
-    height: 30px;
+    /*height: 30px;*/
     text-align: right;
 }
 .field-multiline{
@@ -58,10 +58,12 @@ body {
 }
 .field label{
     font-size: 14px;
+    display: inline !important;
 }
 .field input{
     font-size: 14px;
     width: 252px;
+    height: 30px !important;
 }
 .field span{
     position: absolute;

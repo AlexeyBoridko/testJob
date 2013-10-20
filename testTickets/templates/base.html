@@ -3,14 +3,7 @@
     {% block title %} {% endblock %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "css/style.css" %}" type="text/css" media="all" />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script>
-        $(function() {
-        $( "#id_date_of_birth" ).datepicker({ dateFormat: 'yy-mm-dd' });
-        });
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     {% block header %}{% endblock %}
 </head>
 <body>
