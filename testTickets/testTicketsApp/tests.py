@@ -84,7 +84,7 @@ class SimpleTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
         #checking update with correct new data
-        ui = dict(name='name1', surname='surname1', date_of_birth='1980-01-10', contacts='contacts1',
+        ui = dict(name='name1', surname='surname1', date_of_birth='12/01/1982 12:00', contacts='contacts1',
                   email='some@mail.com', jid='wqw', skype_id='alex_', other_contacts='xd', bio='sd')
 
         response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui)

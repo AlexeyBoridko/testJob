@@ -19,8 +19,8 @@ class UserInfo(models.Model):
 
     def get_date(self):
         if not self.date_of_birth is '':
-            return "%s-%s-%s" % (self.date_of_birth.year, self.date_of_birth.month, self.date_of_birth.day)
-        return "1982-01-13"
+            return "%s / %s / %s" % (self.date_of_birth.day, self.date_of_birth.month, self.date_of_birth.year)
+        return "13/01/1982"
 
     date_birth = property(get_date, set_date)
 
