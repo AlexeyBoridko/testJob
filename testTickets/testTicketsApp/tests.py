@@ -76,7 +76,7 @@ class SimpleTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         #login
-        response = client.login(username='alexey', password='alex')
+        response = client.login(username='admin', password='admin')
         self.assertTrue(response, 'Login was unsuccessful')
 
         # now we will get edit page, because user is authenticated

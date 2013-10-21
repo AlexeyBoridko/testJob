@@ -8,33 +8,33 @@ from django.utils.safestring import mark_safe
 
 I18N = """
 $.fn.datetimepicker.dates['en'] = {
-    days: %s,
-    daysShort: %s,
-    daysMin: %s,
-    months: %s,
-    monthsShort: %s,
-    meridiem: %s,
-    suffix: %s,
-    today: %s
+days: %s,
+daysShort: %s,
+daysMin: %s,
+months: %s,
+monthsShort: %s,
+meridiem: %s,
+suffix: %s,
+today: %s
 };
 """
 
 datetimepicker_options = """
-    format : '%s',
-    startDate : '%s',
-    endDate : '%s',
-    weekStart : %s,
-    daysOfWeekDisabled : %s,
-    autoclose : %s,
-    startView : %s,
-    minView : %s,
-    maxView : %s,
-    todayBtn : %s,
-    todayHighlight : %s,
-    minuteStep : %s,
-    pickerPosition : '%s',
-    showMeridian : %s,
-    language : '%s',
+format : '%s',
+startDate : '%s',
+endDate : '%s',
+weekStart : %s,
+daysOfWeekDisabled : %s,
+autoclose : %s,
+startView : %s,
+minView : %s,
+maxView : %s,
+todayBtn : %s,
+todayHighlight : %s,
+minuteStep : %s,
+pickerPosition : '%s',
+showMeridian : %s,
+language : '%s',
 """
 
 dateConversion = {
@@ -54,6 +54,14 @@ dateConversion = {
 
 class DateTimeWidget(MultiWidget):
 
+
+    class Media:
+        css = dict(all=('css/bootstrap.min.css', 'css/datetimepicker.css'))
+        js = ('js/jquery_1_9_1_.min.js',
+              'js/bootstrap.min.js',
+              'js/bootstrap-datetimepicker.js',
+        )
+
     def __init__(self, attrs=None, options=None):
         if attrs is None:
             attrs = {'readonly': ''}
@@ -62,7 +70,7 @@ class DateTimeWidget(MultiWidget):
             options = {}
 
         self.option = ()
-        self.option += (options.get('format', 'dd/mm/yyyy hh:ii'),)
+        self.option += (options.get('format', 'dd/mm/yyyy'),)
         self.option += (options.get('startDate', ''),)
         self.option += (options.get('endDate', ''),)
         self.option += (options.get('weekStart', '0'),)
@@ -105,10 +113,10 @@ class DateTimeWidget(MultiWidget):
 
     def format_output(self, rendered_widgets):
         """
-        Given a list of rendered widgets (as strings), it inserts an HTML
-        linebreak between them.
+Given a list of rendered widgets (as strings), it inserts an HTML
+linebreak between them.
 
-        Returns a Unicode string representing the HTML for the whole lot.
+Returns a Unicode string representing the HTML for the whole lot.
 """
 
         js_options = datetimepicker_options % self.option
@@ -142,15 +150,3 @@ class DateTimeWidget(MultiWidget):
         output.append(self.widgets[0].render(name, widget_value, final_attrs))
         return mark_safe(self.format_output(output))
 
-        def _media(self):
-            js = ["js/bootstrap-datetimepicker.js"]
-            if self.language != 'en':
-                js.append("js/bootstrap-datetimepicker.js")
-
-            return Media(
-                css={
-                    'all': ('css/datetimepicker.css',)
-                },
-                js=js
-            )
-        media = property(_media)

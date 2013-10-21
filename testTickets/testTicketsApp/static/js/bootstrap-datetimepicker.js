@@ -1346,9 +1346,9 @@ In jquery 1.7.2+ everything works fine.
         },
         headTemplate: '<thead>'+
             '<tr>'+
-            '<th class="prev"><i class="icon-arrow-left"/></th>'+
+            '<th class="prev"><i class="icon-arrow-left"/> << </th>'+
             '<th colspan="5" class="switch"></th>'+
-            '<th class="next"><i class="icon-arrow-right"/></th>'+
+            '<th class="next"><i class="icon-arrow-right"/> >> </th>'+
             '</tr>'+
             '</thead>',
         contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>',
