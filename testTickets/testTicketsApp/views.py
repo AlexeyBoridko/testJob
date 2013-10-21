@@ -18,20 +18,19 @@ def requests_view(request):
 
 
 def main_edit_update(request, my_info_id):
+    template = "testTicketsApp/main_edit.html"
     try:
         item = get_object_or_404(UserInfo, pk=my_info_id)
+        context = dict({'userInfo': item})
     except (KeyError, UserInfo.DoesNotExist):
-        return render(request, 'testTicketsApp/errors.html',
-                      {'errormessage': 'Edit: UserInfo by id %s - not hound' % my_info_id})
+        template = 'testTicketsApp/errors.html'
+        context = dict({'errormessage': 'Edit: UserInfo by id %s - not hound' % my_info_id})
     else:
+        form = UserInfoForm(request.POST or None, request.FILES or None, instance=item)
+        context.update({'my_info': form})
         if request.method == 'POST':
-            form = UserInfoForm(request.POST, request.FILES, instance=item)
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect(reverse('main'))
-            else:
-                return render(request, "testTicketsApp/main_edit.html", {'my_info': form, "userInfo": item})
 
-        else:
-            form = UserInfoForm(instance=item)
-            return render(request, "testTicketsApp/main_edit.html", {'my_info': form, "userInfo": item})
+    return render(request, template, context)

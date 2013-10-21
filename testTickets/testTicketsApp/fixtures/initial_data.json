@@ -17,10 +17,15 @@
   "model": "auth.user",
   "pk": 100000,
   "fields": {
+      "username": "admin",
       "first_name": "Alexey",
       "last_name": "Boridko",
-      "username": "alexey",
-      "email": "alexey@mail.com",
-      "password": "pbkdf2_sha256$10000$1upaszDvgs6m$73zdIqRzXXLHNFCsfJhDBELVgP9LT3gl/JKvZxb1IRo="
+      "is_active": true,
+      "is_superuser": true,
+      "is_staff": true,
+      "email": "adminalexey@mail.com",
+      "last_login": "2013-10-19T15:19:03.543Z",
+      "date_joined": "2013-10-19T15:19:03.543Z",
+      "password": "pbkdf2_sha256$10000$zfAoN90sGFbE$QVWh5cyuGlB1PQXmUKf7LvMcnYOB2kX8zMbJsUl4meU="
   }
 }]

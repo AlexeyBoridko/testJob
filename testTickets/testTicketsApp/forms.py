@@ -3,11 +3,9 @@ from models import UserInfo
 
 
 class UserInfoForm(forms.ModelForm):
-    name = forms.CharField(max_length=50)
-    surname = forms.CharField(max_length=50)
-    jid = forms.CharField(max_length=50)
-    skype_id = forms.CharField(max_length=50)
-    contacts = forms.CharField(max_length=100)
+    #following fields need for setup additional html tags attributes on template page
+    jid = forms.CharField(label='Jabber', max_length=50)
+    skype_id = forms.CharField(label='Skype', max_length=50)
     other_contacts = forms.CharField(widget=forms.Textarea(attrs={'rows': 10, 'cols': 48}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'rows': 10, 'cols': 48}))
     photo = forms.ImageField(label='Photo', required=False, error_messages={'invalid': "Image files only"},

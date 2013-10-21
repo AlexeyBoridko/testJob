@@ -76,7 +76,7 @@ class SimpleTest(TestCase):
         self.assertEqual(response.status_code, 302)
 
         #login
-        response = client.login(username='alexey', password='alex')
+        response = client.login(username='admin', password='admin')
         self.assertTrue(response, 'Login was unsuccessful')
 
         # now we will get edit page, because user is authenticated
@@ -105,3 +105,4 @@ class SimpleTest(TestCase):
         ui["email"] = "alexey@mail.com"
         response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui)
         self.assertRedirects(response, reverse('main'))
+

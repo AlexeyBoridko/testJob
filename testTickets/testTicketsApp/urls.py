@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from testTickets import settings
 from testTicketsApp import views
 from django.contrib.auth.decorators import login_required

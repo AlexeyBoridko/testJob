@@ -12,22 +12,22 @@
         <div class="partcontainer">
             <div class="leftpart">
                 <div class="field">
-                    <label>Name:</label>
+                    {{ my_info.name.label_tag }}
                     {{ my_info.name }}
                     <span class="error">{{ my_info.name.errors }}</span>
                 </div>
                 <div class="field">
-                    <label>Surname:</label>
+                    {{ my_info.surname.label_tag }}
                     {{ my_info.surname }}
                     <span class="error">{{ my_info.surname.errors }}</span>
                 </div>
                 <div class="field">
-                    <label>Date of birth:</label>
+                    {{ my_info.date_of_birth.label_tag}}
                     {{ my_info.date_of_birth}}
                     <span class="error">{{ my_info.date_of_birth.errors }}</span>
                 </div>
                  <div class="field">
-                    <label>Photo:</label>
+                    {{ my_info.photo.label_tag}}
                     {{ my_info.photo}}
                 </div>
                 <div class="field">
@@ -41,32 +41,32 @@
             </div>
             <div class="rightpart">
                 <div class="field">
-                    <label>Contacts:</label>
+                    {{ my_info.contacts.label_tag}}
                     {{ my_info.contacts }}
                     <span class="error">{{ my_info.contacts.errors }}</span>
                 </div>
                 <div class="field">
-                    <label>Email:</label>
+                    {{ my_info.email.label_tag}}
                     {{ my_info.email }}
                     <span class="error">{{ my_info.email.errors }}</span>
                 </div>
                  <div class="field">
-                    <label>Jabber:</label>
+                    {{ my_info.jid.label_tag}}
                     {{ my_info.jid }}
                     <span class="error">{{ my_info.jid.errors }}</span>
                 </div>
                 <div class="field">
-                    <label>Skype:</label>
+                    {{ my_info.skype_id.label_tag}}
                     {{ my_info.skype_id }}
                     <span class="error">{{ my_info.skype_id.errors }}</span>
                 </div>
                 <div class="field-multiline">
-                    <label>Other contacts:</label><br/>
+                    {{ my_info.other_contacts.label_tag}}<br/>
                     {{ my_info.other_contacts}}
                     <span class="error">{{ my_info.other_contacts.errors }}</span>
                 </div>
                 <div class="field-multiline">
-                    <label>Bio:</label><br/>
+                    {{ my_info.bio.label_tag}}<br/>
                     {{ my_info.bio}}
                     <span class="error">{{ my_info.bio.errors }}</span>
                 </div>
