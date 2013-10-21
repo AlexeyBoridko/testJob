@@ -15,7 +15,8 @@ class UserInfoForm(forms.ModelForm):
                              widget=forms.FileInput)
     date_of_birth = forms.DateTimeField(widget=DateTimeWidget(attrs={'autoclose': 'true'}))
 
-    class Meta(object):
+
+    class Meta:
         model = UserInfo
         fields = ['name', 'surname', 'date_of_birth', 'bio', 'email', 'jid',
                   'skype_id', 'other_contacts', 'contacts', 'photo']

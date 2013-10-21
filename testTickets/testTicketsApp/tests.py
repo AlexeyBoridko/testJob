@@ -87,21 +87,25 @@ class SimpleTest(TestCase):
         ui = dict(name='name1', surname='surname1', date_of_birth='12/01/1982 12:00', contacts='contacts1',
                   email='some@mail.com', jid='wqw', skype_id='alex_', other_contacts='xd', bio='sd')
 
-        response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui)
-        self.assertRedirects(response, reverse('main'))
-
+        response_u = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
+                                 HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertRedirects(response_u, reverse('update', kwargs={'my_info_id': user_info_id}))
         ui_changed = UserInfo.objects.get(pk=user_info_id)
-        self.assertEqual(ui_changed.name, 'name1')
+        self.assertEqual(ui_changed.name, ui["name"])
 
         #checking validation. Put incorrect new data to update post
         #Checking email field on incorrect email format
         ui["email"] = "email_test"
 
-        response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui)
-        self.assertContains(response, "Enter a valid email address.")
-        self.assertEqual(response.status_code, 200)
+        resp = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
+                           HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertContains(resp, "Enter a valid email address")
+        self.assertEqual(resp.status_code, 200)
 
         #Checking email field on correct email format
-        ui["email"] = "alexey@mail.com"
-        response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui)
-        self.assertRedirects(response, reverse('main'))
+        ui["email"] = "alexeybor@mail.com"
+        response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
+                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+
+        ui_changed_email = UserInfo.objects.get(pk=user_info_id)
+        self.assertEqual(ui_changed_email.email, ui["email"])

@@ -17,7 +17,46 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-    <form enctype="multipart/form-data" method="post" action="">
+     <script type="text/javascript">
+        $(document).ready(function(){
+{#            $("#submit_status").text("");#}
+{#            $('#progress').hide();#}
+
+            function showProgress() {
+                $("form input, form textarea").prop('disabled', 'disabled');
+                $('#progress').show();
+            }
+
+            function ajaxSuccess(){
+                $("form input, form textarea").removeProp('disabled');
+                $("#submit_status").text("Changes have been saved");
+                $('#progress').hide();
+            }
+
+            function ajaxError(){
+                $("#submit_status").text("Update error");
+            }
+
+            var options = {
+                target: $('body'),
+                beforeSubmit: showProgress,
+                success: ajaxSuccess,
+                error:ajaxError
+            };
+
+            $('#formid').submit(function() {
+                $(this).ajaxSubmit(options);
+                return false;
+            });
+        });
+    </script>
+
+
+    <div id="progress" class="progress">
+        <img  src="{% static "img/progress.gif" %}" alt="Progress..." />
+    </div>
+
+    <form id="formid" enctype="multipart/form-data" method="post" action="" >
     {% csrf_token %}
         <div class="partcontainer">
             <div class="leftpart">
@@ -36,7 +75,7 @@
                     {{ my_info.date_of_birth}}
                     <span class="error">{{ my_info.date_of_birth.errors }}</span>
                 </div>
-                 <div class="field">
+                <div class="field">
                     <label>Photo:</label>
                     {{ my_info.photo}}
                 </div>
@@ -83,6 +122,13 @@
             </div>
         </div>
         <div class="buttons-block-bottom">
+           <div>
+               {% if my_info.errors %}
+                   <label>Update was canceled. Please verify data</label>
+               {% else %}
+                   <label id="submit_status"></label>
+               {% endif %}
+           </div>
            <input type="submit" value="Save"/>
            <a href="{% url 'main' %}">Cancel</a>
         </div>
