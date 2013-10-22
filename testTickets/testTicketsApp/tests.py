@@ -163,3 +163,16 @@ class SimpleTest(TestCase):
         self.assertEqual(obj.model_name, 'UserInfo')
         self.assertEqual(obj.action_type, 'deleted')
 
+
+    def test_priority_field(self):
+
+        o = MiddlewareRequests.objects.all()
+        o.delete()
+        self.assertEqual(len(o), 0)
+
+        client = Client()
+        response = client.get(reverse('main'))
+
+        o = MiddlewareRequests.objects.all()
+        self.assertEqual(len(o), 1)
+        self.assertEqual(o[0].priority, False)

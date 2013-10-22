@@ -31,6 +31,7 @@ class MiddlewareRequests(models.Model):
     path = models.CharField(max_length=255, default="")
     method = models.CharField(max_length=20, default="")
     runtime = models.DateTimeField(auto_now_add=True)
+    priority = models.BooleanField("Priority", default=False)
 
 
 class ModelChangesLog(models.Model):
