@@ -1,8 +1,9 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import patterns, url, include
 from testTickets import settings
 from testTicketsApp import views
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout
+from django.contrib import admin
 
 urlpatterns = patterns('',
         url(r'^$', views.main, name='main'),
@@ -14,4 +15,6 @@ urlpatterns = patterns('',
 
         url(r'^(?P<my_info_id>\d+)/update/$', login_required(views.main_edit_update), name='update'),
         url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+
+        url(r'^admin/', include(admin.site.urls)),
 )

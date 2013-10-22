@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'testTicketsApp',
     'south',
+    'testTicketsApp.templatetags',
 
 )
 

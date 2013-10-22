@@ -8,6 +8,13 @@
         <a href="{% url 'login' %}">Login</a>
     {% endif %}
 {% endblock %}
+{% block edit_admin %}
+    {%load tags %}
+    {% if user.is_authenticated %}
+            <a href="{% url 'update' my_info.id %}">Edit</a>
+            <a href="{% edit_link my_info %}">(admin)</a>
+    {% endif %}
+{% endblock %}
 {% block content %}
     <div class="partcontainer">
         <div class="leftpart">
@@ -61,9 +68,6 @@
         </div>
     </div>
     <div class="buttons-block-bottom">
-        {% if user.is_authenticated %}
-             <a href="{% url 'update' my_info.id %}">Edit</a>
-        {% endif %}
     </div>
     <hr>
     <div class="partcontainer">

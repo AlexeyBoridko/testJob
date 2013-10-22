@@ -3,6 +3,7 @@ from testTicketsApp.models import UserInfo
 from django.test.client import Client
 from django.core.urlresolvers import reverse
 from .models import MiddlewareRequests
+from testTicketsApp.templatetags.tags import edit_link
 
 
 class SimpleTest(TestCase):
@@ -90,8 +91,8 @@ class SimpleTest(TestCase):
         response_u = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
                                  HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertRedirects(response_u, reverse('update', kwargs={'my_info_id': user_info_id}))
-        ui_changed = UserInfo.objects.get(pk=user_info_id)
-        self.assertEqual(ui_changed.name, ui["name"])
+        uo = UserInfo.objects.get(pk=user_info_id)
+        self.assertEqual(uo.name, ui["name"])
 
         #checking validation. Put incorrect new data to update post
         #Checking email field on incorrect email format
@@ -104,8 +105,27 @@ class SimpleTest(TestCase):
 
         #Checking email field on correct email format
         ui["email"] = "alexeybor@mail.com"
-        response = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
-                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
         ui_changed_email = UserInfo.objects.get(pk=user_info_id)
         self.assertEqual(ui_changed_email.email, ui["email"])
+
+    def test_tag_edit_admin_(self):
+        client = Client()
+        response = client.get(reverse('main'))
+
+        #check that we don't have access to edit by admin before login
+        self.assertNotContains(response, "(admin)")
+
+        #login
+        response = client.login(username='admin', password='admin')
+        self.assertTrue(response)
+
+        #check again accesss to admin
+        resp = client.get(reverse('main'))
+        self.assertContains(resp, "(admin)")
+
+        #check generated url
+         # get data
+        user_info_id = UserInfo.objects.all()[0].id
+        self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/', user_info_id)

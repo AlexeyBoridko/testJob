@@ -8,7 +8,13 @@
 <body>
     <div class="page_container">
         <div class="header-line-h1">{% block h1 %} {% endblock %}</div>
-        <div class="header-line-login-logout">{% block login_logout %} {% endblock %}</div>
+        <div class="header-line-login-logout">
+        <div class="header-line-login-logout">
+            {% block login_logout %} {% endblock %}
+            <br/><br/>
+            {% block edit_admin %}{% endblock %}
+      </div>
+        </div>
         <div style="clear:both; height: 10px;"></div>
         <div>{% block content %} {% endblock %}</div>
     </div>
