@@ -128,4 +128,4 @@ class SimpleTest(TestCase):
         #check generated url
          # get data
         user_info_id = UserInfo.objects.all()[0].id
-        self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/', user_info_id)
+        self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/' % user_info_id)
