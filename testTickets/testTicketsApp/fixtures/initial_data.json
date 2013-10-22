@@ -28,4 +28,5 @@
       "date_joined": "2013-10-19T15:19:03.543Z",
       "password": "pbkdf2_sha256$10000$zfAoN90sGFbE$QVWh5cyuGlB1PQXmUKf7LvMcnYOB2kX8zMbJsUl4meU="
   }
-}]
+},{"pk": 1, "model": "sites.site", "fields": {"domain": "example.com", "name": "example.com"}}
+]
