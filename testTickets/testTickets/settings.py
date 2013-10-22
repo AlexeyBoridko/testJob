@@ -140,8 +140,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'testTicketsApp',
     'south',
-    'testTicketsApp.templatetags',
-
 )
 
 SOUTH_TESTS_MIGRATE = False

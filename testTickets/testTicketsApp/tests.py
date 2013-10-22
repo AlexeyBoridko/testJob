@@ -1,3 +1,5 @@
+from StringIO import StringIO
+from django.core.management import call_command
 from django.test import TestCase
 from testTicketsApp.models import UserInfo
 from django.test.client import Client
@@ -129,3 +131,10 @@ class SimpleTest(TestCase):
          # get data
         user_info_id = UserInfo.objects.all()[0].id
         self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/' % user_info_id)
+
+
+    def test_print_models_command(self):
+        obj = StringIO()
+        call_command("printallmodels", stdout=obj)
+        self.assertTrue('[UserInfo] - model has 1 object(s).' in obj.getvalue())
+
