@@ -135,6 +135,9 @@ class SimpleTest(TestCase):
 
     def test_print_models_command(self):
         obj = StringIO()
-        call_command("printallmodels", stdout=obj)
-        self.assertTrue('[UserInfo] - model has 1 object(s).' in obj.getvalue())
+        obj_error = StringIO()
+        call_command("printallmodels", stdout=obj, stderr=obj_error)
+        msg = '[UserInfo] - model has 1 object(s).'
+        self.assertTrue(msg in obj.getvalue())
+        self.assertTrue('error: %s' % msg in obj_error.getvalue())
 

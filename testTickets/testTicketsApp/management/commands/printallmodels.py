@@ -6,3 +6,4 @@ class Command(BaseCommand):
         for model in get_models():
             result = '[%s] - model has %d object(s).\n' % (model.__name__, model.objects.count())
             self.stdout.write(result)
+            self.stderr.write('error: %s' % result)
