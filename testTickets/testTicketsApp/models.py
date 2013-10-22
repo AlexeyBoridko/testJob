@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime, timedelta
+from .signals import *
 
 
 class UserInfo(models.Model):
@@ -30,3 +31,12 @@ class MiddlewareRequests(models.Model):
     path = models.CharField(max_length=255, default="")
     method = models.CharField(max_length=20, default="")
     runtime = models.DateTimeField(auto_now_add=True)
+
+
+class ModelChangesLog(models.Model):
+    runtime = models.DateTimeField("Time of changes happend", auto_now_add=True)
+    model_name = models.CharField("Model name", max_length=50)
+    action_type = models.CharField("Type of action", max_length=10)
+
+    class Meta:
+        ordering = ['-runtime']

@@ -4,7 +4,7 @@ from django.test import TestCase
 from testTicketsApp.models import UserInfo
 from django.test.client import Client
 from django.core.urlresolvers import reverse
-from .models import MiddlewareRequests
+from .models import MiddlewareRequests, ModelChangesLog
 from testTicketsApp.templatetags.tags import edit_link
 
 
@@ -137,4 +137,29 @@ class SimpleTest(TestCase):
         obj = StringIO()
         call_command("printallmodels", stdout=obj)
         self.assertTrue('[UserInfo] - model has 1 object(s).' in obj.getvalue())
+
+
+    def test_signals(self):
+        #clean log
+        obj_log = ModelChangesLog.objects.all()
+        obj_log.delete()
+
+        self.assertEqual(len(obj_log), 0)
+        #let's update one record
+        ci = UserInfo.objects.all()[0]
+        ci.name = 'Alexey 1'
+        ci.save()
+
+        #make sure we have one update record
+        obj = ModelChangesLog.objects.all()
+        self.assertEqual(len(obj), 1)
+        update_record = obj[0]
+        self.assertEqual(update_record.action_type, 'updated')
+        #let's delete the record
+        ci.delete()
+        obj = ModelChangesLog.objects.get(action_type='deleted')
+
+        #let's check that model name equal ContactInfo
+        self.assertEqual(obj.model_name, 'UserInfo')
+        self.assertEqual(obj.action_type, 'deleted')
 
