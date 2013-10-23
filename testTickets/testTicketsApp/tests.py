@@ -26,24 +26,37 @@ class SimpleTest(TestCase):
         empty_list = MiddlewareRequests.objects.all()
         self.assertEqual(empty_list.count(), 0)
 
-    def test_request_object_create(self):
-        MiddlewareRequests.objects.create(host="127.0.0.1:8000", path="/testonly/", method="GET")
-        records_list = MiddlewareRequests.objects.all()
-        self.assertEqual(records_list.count(), 1)
-
-        m = MiddlewareRequests.objects.get(pk=1)
-        self.assertEqual(m.host, "127.0.0.1:8000")
-        self.assertEqual(m.path, "/testonly/")
-        self.assertEqual(m.method, "GET")
-
     def test_request_tracker_middleware_full_cycle(self):
+        #make sure that MiddlewareRequests storege is empty
+        objects = MiddlewareRequests.objects.all()
+        self.assertEqual(objects.count(), 0)
+
+        #make sure that 'MiddlewareRequests' we can create
+        MiddlewareRequests.objects.create(host="127.0.0.1:8000", path="/testonly/", method="GET")
+        objects = MiddlewareRequests.objects.all()
+        self.assertEqual(objects.count(), 1)
+
+        #Now lets create request to request view page
         client = Client()
         response = client.get(reverse('requests'))
-        records_list = MiddlewareRequests.objects.all()
-
-        self.assertEqual(records_list.count(), 1)
+        objects = MiddlewareRequests.objects.all()
         self.assertEqual(response.status_code, 200)
+
+        #Request information will stored in log table (MiddlewareRequests)
+        #lets checking it
+        self.assertEqual(objects.count(), 2)
+
+        #Now, check client site
+        #Request view page will contains following tags with data:pk=3, path="/requests/", method:"GET"
+        self.assertContains(response, "<td>2</td>")
         self.assertContains(response, "<td>/requests/</td>")
+        self.assertContains(response, "<td>GET</td>")
+
+        #And our object will contains same data
+        obj = MiddlewareRequests.objects.get(pk=2)
+        self.assertEqual(obj.pk, 2)
+        self.assertEqual(obj.path, "/requests/")
+        self.assertEqual(obj.method, "GET")
 
     def test_first_10_requests_show(self):
         client = Client()
@@ -132,7 +145,6 @@ class SimpleTest(TestCase):
         user_info_id = UserInfo.objects.all()[0].id
         self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/' % user_info_id)
 
-
     def test_print_models_command(self):
         obj = StringIO()
         obj_error = StringIO()
@@ -140,7 +152,6 @@ class SimpleTest(TestCase):
         msg = '[UserInfo] - model has 1 object(s).'
         self.assertTrue(msg in obj.getvalue())
         self.assertTrue('error: %s' % msg in obj_error.getvalue())
-
 
     def test_signals(self):
         #clean log
@@ -166,15 +177,13 @@ class SimpleTest(TestCase):
         self.assertEqual(obj.model_name, 'UserInfo')
         self.assertEqual(obj.action_type, 'deleted')
 
-
     def test_priority_field(self):
-
         o = MiddlewareRequests.objects.all()
         o.delete()
         self.assertEqual(len(o), 0)
 
         client = Client()
-        response = client.get(reverse('main'))
+        client.get(reverse('main'))
 
         o = MiddlewareRequests.objects.all()
         self.assertEqual(len(o), 1)
