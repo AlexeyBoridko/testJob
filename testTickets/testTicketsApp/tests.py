@@ -135,8 +135,11 @@ class SimpleTest(TestCase):
 
     def test_print_models_command(self):
         obj = StringIO()
-        call_command("printallmodels", stdout=obj)
-        self.assertTrue('[UserInfo] - model has 1 object(s).' in obj.getvalue())
+        obj_error = StringIO()
+        call_command("printallmodels", stdout=obj, stderr=obj_error)
+        msg = '[UserInfo] - model has 1 object(s).'
+        self.assertTrue(msg in obj.getvalue())
+        self.assertTrue('error: %s' % msg in obj_error.getvalue())
 
 
     def test_signals(self):
@@ -175,4 +178,4 @@ class SimpleTest(TestCase):
 
         o = MiddlewareRequests.objects.all()
         self.assertEqual(len(o), 1)
-        self.assertEqual(o[0].priority, False)
+        self.assertEqual(o[0].priority, 0)

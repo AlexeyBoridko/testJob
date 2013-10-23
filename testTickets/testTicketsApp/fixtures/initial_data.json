@@ -1,18 +1,5 @@
-[{
-  "model": "testTicketsApp.UserInfo",
-  "pk": 1,
-  "fields": {
-    "name": "Alexey",
-    "surname": "Boridko",
-    "date_of_birth": "1982-01-13T15:19:03.543Z",
-    "bio": "MS, Software Engineering. Kherson State University, Ukraine",
-    "email": "my@email.com",
-    "jid": "alexey@42cc.co",
-    "skype_id": "myskype",
-    "other_contacts": "work phone number 12345678. home phone number 123456789000. Postcode 767544",
-    "contacts": "Location - Kherson"
-  }
-},
+[{"pk": 1, "model": "sites.site", "fields": {"domain": "example.com", "name": "example.com"}}
+,
 {
   "model": "auth.user",
   "pk": 100000,
@@ -28,5 +15,18 @@
       "date_joined": "2013-10-19T15:19:03.543Z",
       "password": "pbkdf2_sha256$10000$zfAoN90sGFbE$QVWh5cyuGlB1PQXmUKf7LvMcnYOB2kX8zMbJsUl4meU="
   }
-},{"pk": 1, "model": "sites.site", "fields": {"domain": "example.com", "name": "example.com"}}
-]
+},{
+  "model": "testTicketsApp.UserInfo",
+  "pk": 1,
+  "fields": {
+    "name": "Alexey",
+    "surname": "Boridko",
+    "date_of_birth": "1982-01-13T15:19:03.543Z",
+    "bio": "MS, Software Engineering. Kherson State University, Ukraine",
+    "email": "my@email.com",
+    "jid": "alexey@42cc.co",
+    "skype_id": "myskype",
+    "other_contacts": "work phone number 12345678. home phone number 123456789000. Postcode 767544",
+    "contacts": "Location - Kherson"
+  }
+}]

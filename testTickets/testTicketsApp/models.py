@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import datetime, timedelta
-from .signals import *
 
 
 class UserInfo(models.Model):
@@ -31,7 +30,11 @@ class MiddlewareRequests(models.Model):
     path = models.CharField(max_length=255, default="")
     method = models.CharField(max_length=20, default="")
     runtime = models.DateTimeField(auto_now_add=True)
-    priority = models.BooleanField("Priority", default=False)
+    priority = models.IntegerField("Priority", default=0)
+
+
+    class Meta:
+        ordering = ['priority', 'runtime']
 
 
 class ModelChangesLog(models.Model):
