@@ -38,7 +38,8 @@ def main_edit_update(request, my_info_id):
     else:
         form = UserInfoForm(request.POST or None, request.FILES or None, instance=item)
         context.update({'my_info': form})
-        if request.method == 'POST' and request.is_ajax():
+        request_method = request.method
+        if (request_method == 'POST' and request.is_ajax()) or request_method == 'POST':
             if form.is_valid():
                 form.save()
                 return HttpResponseRedirect(reverse('update', kwargs={'my_info_id': my_info_id}))
