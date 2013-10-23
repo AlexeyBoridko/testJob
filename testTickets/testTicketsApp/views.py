@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
-from forms import UserInfoForm
+from forms import UserInfoForm, RequestsForm
 
 
 def main(request):
@@ -15,8 +15,12 @@ def main(request):
 
 
 def requests_view(request):
+    template = "testTicketsApp/requests.html"
     requests_list = MiddlewareRequests.objects.all().order_by('id')[:10]
-    return render(request, "testTicketsApp/requests.html", {'requestsList': requests_list})
+
+    form = RequestsForm(instance=requests_list[0])
+    context = dict({'requestsList': requests_list, 'form': form})
+    return render(request, template, context)
 
 
 def main_edit_update(request, my_info_id):
