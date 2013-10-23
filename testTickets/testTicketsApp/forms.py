@@ -35,4 +35,4 @@ class RequestsForm(forms.ModelForm):
 
      class Media:
         css = dict(all=())
-        js = ('js/jquery_latest.js', 'js/jquery.tablesorter.min.js')
+        js = ('js/jquery.latest.js', 'js/jquery.tablesorter.min.js')
