@@ -1,5 +1,5 @@
 from django import forms
-from models import UserInfo
+from models import UserInfo, MiddlewareRequests
 from widgets import DateTimeWidget
 
 
@@ -25,3 +25,14 @@ class UserInfoForm(forms.ModelForm):
         css = dict(all=())
         js = ('js/jquery.form.js',)
 
+
+class RequestsForm(forms.ModelForm):
+
+
+     class Meta:
+        model = MiddlewareRequests
+
+
+     class Media:
+        css = dict(all=())
+        js = ('js/jquery_latest.js', 'js/jquery.tablesorter.min.js')

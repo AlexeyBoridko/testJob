@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block title %}<title>First 10 http requests</title>{% endblock %}
+{% block header %}
+    {{ form.media }}
+{% endblock %}
 {% block h1 %}First 10 http requests.{% endblock %}
 {% block login_logout %}
     {% if user.is_authenticated %}
@@ -10,7 +13,14 @@
 {% endblock %}
 {%load tags %}
 {% block content %}
-    <table class="table">
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#myTable").tablesorter( {sortList: [[5,1]]});
+    });
+
+    </script>
+    <table id="myTable" class="tablesorter">
+        <thead>
         <tr>
             <th>id</th>
             <th>Host</th>
@@ -22,6 +32,8 @@
                 <th>Edit</th>
             {% endif %}
         </tr>
+        </thead>
+        <tbody>
         {% if user.is_authenticated %}
             {% for r in requestsList %}
                 <tr>
@@ -46,6 +58,7 @@
                 </tr>
             {% endfor %}
         {% endif %}
+    </tbody>
     </table>
     <h3>Items count: {{ requestsList.count }}</h3>
 {% endblock %}

@@ -122,3 +122,13 @@ body {
 .progress img{
     padding-top: 2px;
 }
+
+table.tablesorter thead tr th{
+    background-color: #E6EEEE;
+    border: 1px solid #FFFFFF;
+
+}
+th.header {
+    cursor: pointer;
+    font-weight: bold;
+}
