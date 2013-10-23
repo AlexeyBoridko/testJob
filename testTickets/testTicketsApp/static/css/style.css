@@ -22,7 +22,6 @@ body {
     float: right;
     width: 50%;
 }
-
 .label{
     /*font-size: 14px;*/
     float: left;
@@ -107,7 +106,7 @@ body {
 }
 .progress {
 	/*width: 400px;*/
-	height: 300px;
+	/*height: 300px;*/
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -132,3 +131,33 @@ th.header {
     cursor: pointer;
     font-weight: bold;
 }
+
+.leftpart label{
+    float: left;
+}
+.leftpart p{
+    padding-left: 80px;
+}
+.rightpart p{
+    padding-left: 100px;
+}
+
+.rightpart label{
+    float: left;
+}
+.no-photo-view{
+    margin-left: 60px;
+    width:250px;
+    height:330px;
+    border: 1px solid black;
+}
+.no-photo-edit{
+    margin-left: 100px;
+    width:250px;
+    height:330px;
+    border: 1px solid black;
+}
+.label-multiline-view{
+      height: 150px;
+}
+

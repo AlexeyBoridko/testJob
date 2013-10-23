@@ -10,8 +10,12 @@ from forms import UserInfoForm, RequestsForm
 
 
 def main(request):
+    template = "testTicketsApp/main.html"
     ui = get_object_or_404(UserInfo, pk=1)
-    return render(request, "testTicketsApp/main.html", {'my_info': ui})
+
+    form = UserInfoForm(instance=ui)
+    context = dict({'my_info': ui, 'form': form})
+    return render(request, template, context)
 
 
 def requests_view(request):

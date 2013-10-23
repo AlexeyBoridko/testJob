@@ -22,8 +22,8 @@ class UserInfoForm(forms.ModelForm):
 
 
     class Media:
-        css = dict(all=())
-        js = ('js/jquery.form.js',)
+        css = dict(all=('css/style.css',))
+        js = ("js/jquery.form.js",)
 
 
 class RequestsForm(forms.ModelForm):
@@ -34,5 +34,5 @@ class RequestsForm(forms.ModelForm):
 
 
      class Media:
-        css = dict(all=())
+        css = dict(all=('css/style.css',))
         js = ('js/jquery.latest.js', 'js/jquery.tablesorter.min.js')
