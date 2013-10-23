@@ -24,3 +24,4 @@ def model_changes_log(sender, **kwargs):
         models.ModelChangesLog.objects.create(action_type=action, model_name=db_model_name)
     except:
         return
+
