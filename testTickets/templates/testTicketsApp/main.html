@@ -15,8 +15,8 @@
 {% block edit_admin %}
     {%load tags %}
     {% if user.is_authenticated %}
-            <a href="{% url 'update' my_info.id %}">Edit</a>
-            <a href="{% edit_link my_info %}">(admin)</a>
+            <a href="{% url 'update' user_info.id %}">Edit</a>
+            <a href="{% edit_link user_info %}">(admin)</a>
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -24,20 +24,20 @@
         <div class="leftpart">
             <div>
                  {{ form.name.label_tag }}
-                <p>{{ my_info.name }}</p>
+                <p>{{ user_info.name }}</p>
             </div>
             <div>
                  {{ form.surname.label_tag }}
-                <p>{{ my_info.surname}}</p>
+                <p>{{ user_info.surname}}</p>
             </div>
             <div>
                 {{ form.date_birth.label_tag }}
-                <p>{{ my_info.date_birth }}</p>
+                <p>{{ user_info.date_birth }}</p>
             </div>
             <div>
                 {{ form.photo.label_tag }}
-                {% if my_info.photo%}
-                    <img src="{{ my_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
+                {% if user_info.photo%}
+                    <img src="{{ user_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
                 {% else %}
                     <div class="no-photo-view">Photo was not uploaded yet</div>
                 {% endif %}
@@ -47,27 +47,27 @@
         <div class="rightpart">
             <div>
                 {{ form.contacts.label_tag }}
-                 <p>{{ my_info.contacts }}</p>
+                 <p>{{ user_info.contacts }}</p>
             </div>
             <div>
                 {{ form.email.label_tag }}
-                <p>{{ my_info.email}}</p>
+                <p>{{ user_info.email }}</p>
             </div>
             <div>
                 {{ form.jid.label_tag }}
-                <p>{{ my_info.jid}}</p>
+                <p>{{ user_info.jid }}</p>
             </div>
             <div>
                 {{ form.skype_id.label_tag }}
-                <p>{{ my_info.skype_id}}</p>
+                <p>{{ user_info.skype_id}}</p>
             </div>
              <div class="label-multiline-view">
                 {{ form.other_contacts.label_tag }}
-                <div class="data-multiline">{{ my_info.other_contacts}}</div>
+                <div class="data-multiline">{{ user_info.other_contacts }}</div>
             </div>
             <div class="label-multiline-view">
                 {{ form.bio.label_tag }}
-                <div class="data-multiline">{{ my_info.bio}}</div>
+                <div class="data-multiline">{{ user_info.bio }}</div>
             </div>
         </div>
     </div>
@@ -78,3 +78,4 @@
         <a href="{% url 'requests' %}">requests</a>
     </div>
 {% endblock %}
+

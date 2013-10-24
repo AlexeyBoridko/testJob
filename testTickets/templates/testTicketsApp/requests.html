@@ -35,7 +35,7 @@
         </thead>
         <tbody>
         {% if user.is_authenticated %}
-            {% for r in requestsList %}
+            {% for r in requests_list %}
                 <tr>
                     <td>{{ r.id }}</td>
                     <td>{{ r.host }}</td>
@@ -47,7 +47,7 @@
                 </tr>
             {% endfor %}
         {% else %}
-             {% for r in requestsList %}
+             {% for r in requests_list %}
                 <tr>
                     <td>{{ r.id }}</td>
                     <td>{{ r.host }}</td>
@@ -60,5 +60,5 @@
         {% endif %}
     </tbody>
     </table>
-    <h3>Items count: {{ requestsList.count }}</h3>
+    <h3>Items count: {{ requests_list.count }}</h3>
 {% endblock %}

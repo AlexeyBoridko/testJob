@@ -65,7 +65,7 @@ class SimpleTest(TestCase):
 
         response = client.get(reverse('requests'))
 
-        requests_list = response.context['requestsList']
+        requests_list = response.context['requests_list']
         self.assertEqual(requests_list.count(), 10)
 
         first_id = 1
@@ -82,11 +82,11 @@ class SimpleTest(TestCase):
 
     def test_edit_data(self):
         # get data
-        user_info_id = UserInfo.objects.all()[0].id
+        item_id = UserInfo.objects.all()[0].id
 
         # First check edit form mast be present and login required
         client = Client()
-        response = client.get(reverse('update', kwargs={'my_info_id': user_info_id}))
+        response = client.get(reverse('update', kwargs={'item_id': item_id}))
 
         #login required
         self.assertEqual(response.status_code, 302)
@@ -96,33 +96,33 @@ class SimpleTest(TestCase):
         self.assertTrue(response, 'Login was unsuccessful')
 
         # now we will get edit page, because user is authenticated
-        response = client.get(reverse('update', kwargs={'my_info_id': user_info_id}))
+        response = client.get(reverse('update', kwargs={'item_id': item_id}))
         self.assertEqual(response.status_code, 200)
 
         #checking update with correct new data
         ui = dict(name='name1', surname='surname1', date_of_birth='12/01/1982', contacts='contacts1',
                   email='some@mail.com', jid='wqw', skype_id='alex_', other_contacts='xd', bio='sd')
 
-        response_u = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
+        response_u = client.post(reverse('update', kwargs={'item_id': item_id}), ui,
                                  HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertRedirects(response_u, reverse('update', kwargs={'my_info_id': user_info_id}))
-        uo = UserInfo.objects.get(pk=user_info_id)
+        self.assertRedirects(response_u, reverse('update', kwargs={'item_id': item_id}))
+        uo = UserInfo.objects.get(pk=item_id)
         self.assertEqual(uo.name, ui["name"])
 
         #checking validation. Put incorrect new data to update post
         #Checking email field on incorrect email format
         ui["email"] = "email_test"
 
-        resp = client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui,
+        resp = client.post(reverse('update', kwargs={'item_id': item_id}), ui,
                            HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertContains(resp, "Enter a valid email address")
         self.assertEqual(resp.status_code, 200)
 
         #Checking email field on correct email format
         ui["email"] = "alexeybor@mail.com"
-        client.post(reverse('update', kwargs={'my_info_id': user_info_id}), ui, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        client.post(reverse('update', kwargs={'item_id': item_id}), ui, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
 
-        ui_changed_email = UserInfo.objects.get(pk=user_info_id)
+        ui_changed_email = UserInfo.objects.get(pk=item_id)
         self.assertEqual(ui_changed_email.email, ui["email"])
 
     def test_tag_edit_admin_(self):
@@ -142,8 +142,8 @@ class SimpleTest(TestCase):
 
         #check generated url
          # get data
-        user_info_id = UserInfo.objects.all()[0].id
-        self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/' % user_info_id)
+        item_id = UserInfo.objects.all()[0].id
+        self.assertEqual(edit_link(UserInfo.objects.all()[0]), '/admin/testTicketsApp/userinfo/%s/' % item_id)
 
     def test_print_models_command(self):
         obj = StringIO()

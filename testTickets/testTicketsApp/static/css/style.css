@@ -26,7 +26,8 @@ body {
     /*font-size: 14px;*/
     float: left;
     width: 100px;
-    /*height: 28px;*/
+    height: 30px;
+    padding-top: 10px;
 }
 .data{
     width: 300px;
@@ -39,7 +40,8 @@ body {
 
 .field{
     width: 356px;
-    /*height: 30px;*/
+    height: 30px;
+    margin-top: 14px;
     text-align: right;
 }
 .field-multiline{
@@ -101,8 +103,20 @@ body {
     height:330px;
     border: 1px solid black;
 }
-.error{
+
+.errorlist li{
     color: red;
+    font-size: 11px;
+    position: absolute;
+    margin-top: -18px;
+    margin-left: 80px;
+}
+.field-multiline li{
+ color: red;
+    font-size: 12px;
+    position: absolute;
+    margin-top: 0px;
+    margin-left:90px;
 }
 .progress {
 	/*width: 400px;*/
@@ -160,4 +174,9 @@ th.header {
 .label-multiline-view{
       height: 150px;
 }
+.clear-both{
+    clear:both;
+    height: 10px;
+}
+
 

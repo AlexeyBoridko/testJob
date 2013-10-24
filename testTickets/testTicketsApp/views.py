@@ -11,10 +11,10 @@ from forms import UserInfoForm, RequestsForm
 
 def main(request):
     template = "testTicketsApp/main.html"
-    ui = get_object_or_404(UserInfo, pk=1)
+    item = get_object_or_404(UserInfo, pk=1)
 
-    form = UserInfoForm(instance=ui)
-    context = dict({'my_info': ui, 'form': form})
+    form = UserInfoForm(instance=item)
+    context = dict({'user_info': item, 'form': form})
     return render(request, template, context)
 
 
@@ -23,25 +23,25 @@ def requests_view(request):
     requests_list = MiddlewareRequests.objects.all().order_by('id')[:10]
 
     form = RequestsForm(instance=requests_list[0])
-    context = dict({'requestsList': requests_list, 'form': form})
+    context = dict({'requests_list': requests_list, 'form': form})
     return render(request, template, context)
 
 
-def main_edit_update(request, my_info_id):
+def main_edit_update(request, item_id):
     template = "testTicketsApp/main_edit.html"
     try:
-        item = get_object_or_404(UserInfo, pk=my_info_id)
-        context = dict({'userInfo': item})
+        item = get_object_or_404(UserInfo, pk=item_id)
+        context = dict({'user_info': item})
     except (KeyError, UserInfo.DoesNotExist):
         template = 'testTicketsApp/errors.html'
-        context = dict({'errormessage': 'Edit: UserInfo by id %s - not hound' % my_info_id})
+        context = dict({'errormessage': 'Edit: UserInfo by id %s - not hound' % item_id})
     else:
         form = UserInfoForm(request.POST or None, request.FILES or None, instance=item)
-        context.update({'my_info': form})
+        context.update({'form': form})
         request_method = request.method
         if (request_method == 'POST' and request.is_ajax()) or request_method == 'POST':
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect(reverse('update', kwargs={'my_info_id': my_info_id}))
+                return HttpResponseRedirect(reverse('update', kwargs={'item_id': item_id}))
 
     return render(request, template, context)

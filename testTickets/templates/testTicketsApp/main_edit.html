@@ -3,7 +3,7 @@
 
 {% block header %}
     {% load staticfiles %}
-    {{ my_info.media }}
+    {{ form.media }}
 {% endblock %}
 
 {% block h1 %}42 Coffee Cups Test Assignment{% endblock %}
@@ -57,28 +57,28 @@
         <div class="partcontainer">
             <div class="leftpart">
                 <div class="field">
-                    {{ my_info.name.label_tag }}
-                    {{ my_info.name }}
-                    <span class="error">{{ my_info.name.errors }}</span>
+                    {{ user_info.name.errors }}
+                    {{ form.name.label_tag }}
+                    {{ form.name }}
                 </div>
                 <div class="field">
-                    {{ my_info.surname.label_tag }}
-                    {{ my_info.surname }}
-                    <span class="error">{{ my_info.surname.errors }}</span>
+                    {{ form.surname.errors }}
+                    {{ form.surname.label_tag }}
+                    {{ form.surname }}
                 </div>
                 <div class="field">
-                    {{ my_info.date_of_birth.label_tag}}
-                    {{ my_info.date_of_birth}}
-                    <span class="error">{{ my_info.date_of_birth.errors }}</span>
+                    {{ form.date_of_birth.errors }}
+                    {{ form.date_of_birth.label_tag}}
+                    {{ form.date_of_birth}}
                 </div>
                 <div class="field">
-                    {{ my_info.photo.label_tag}}
-                    {{ my_info.photo}}
+                    {{ form.photo.label_tag}}
+                    {{ form.photo}}
                 </div>
                 <div class="field">
                     <label></label>
-                    {% if userInfo.photo%}
-                        <img src="{{ userInfo.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
+                    {% if user_info.photo%}
+                        <img src="{{ user_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
                     {% else %}
                         <div class="no-photo-edit">Photo was not uploaded yet</div>
                     {% endif %}
@@ -86,40 +86,40 @@
             </div>
             <div class="rightpart">
                 <div class="field">
-                    {{ my_info.contacts.label_tag}}
-                    {{ my_info.contacts }}
-                    <span class="error">{{ my_info.contacts.errors }}</span>
+                    {{ form.contacts.errors }}
+                    {{ form.contacts.label_tag}}
+                    {{ form.contacts }}
                 </div>
                 <div class="field">
-                    {{ my_info.email.label_tag}}
-                    {{ my_info.email }}
-                    <span class="error">{{ my_info.email.errors }}</span>
+                    {{ form.email.errors }}
+                    {{ form.email.label_tag}}
+                    {{ form.email }}
                 </div>
                  <div class="field">
-                    {{ my_info.jid.label_tag }}
-                    {{ my_info.jid }}
-                    <span class="error">{{ my_info.jid.errors }}</span>
+                    {{ form.jid.errors }}
+                    {{ form.jid.label_tag }}
+                    {{ form.jid }}
                 </div>
                 <div class="field">
-                    {{ my_info.skype_id.label_tag }}
-                    {{ my_info.skype_id }}
-                    <span class="error">{{ my_info.skype_id.errors }}</span>
+                    {{ form.skype_id.errors }}
+                    {{ form.skype_id.label_tag }}
+                    {{ form.skype_id }}
                 </div>
                 <div class="field-multiline">
-                    {{ my_info.other_contacts.label_tag }}
-                    {{ my_info.other_contacts}}
-                    <span class="error">{{ my_info.other_contacts.errors }}</span>
+                    {{ form.other_contacts.errors }}
+                    {{ form.other_contacts.label_tag }}
+                    {{ form.other_contacts}}
                 </div>
                 <div class="field-multiline">
-                    {{ my_info.bio.label_tag}}
-                    {{ my_info.bio}}
-                    <span class="error">{{ my_info.bio.errors }}</span>
+                    {{ form.bio.errors }}
+                    {{ form.bio.label_tag}}
+                    {{ form.bio}}
                 </div>
             </div>
         </div>
         <div class="buttons-block-bottom">
            <div>
-               {% if my_info.errors %}
+               {% if form.errors %}
                    <label>Update was canceled. Please verify data</label>
                {% else %}
                    <label id="submit_status"></label>

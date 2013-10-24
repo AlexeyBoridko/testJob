@@ -14,12 +14,10 @@ class UserInfoForm(forms.ModelForm):
     date_of_birth = forms.DateTimeField(widget=DateTimeWidget(attrs={'readonly': ''},
                                                               options=dict(autoclose='true', minView='2', maxView='2')))
 
-
     class Meta:
         model = UserInfo
         fields = ['name', 'surname', 'date_of_birth', 'bio', 'email', 'jid',
                   'skype_id', 'other_contacts', 'contacts', 'photo']
-
 
     class Media:
         css = dict(all=('css/style.css',))
@@ -27,12 +25,10 @@ class UserInfoForm(forms.ModelForm):
 
 
 class RequestsForm(forms.ModelForm):
-
-
-     class Meta:
+    class Meta:
         model = MiddlewareRequests
 
-
-     class Media:
+    class Media:
         css = dict(all=('css/style.css',))
         js = ('js/jquery.latest.js', 'js/jquery.tablesorter.min.js')
+

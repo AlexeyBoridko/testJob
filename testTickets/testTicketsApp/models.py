@@ -32,7 +32,6 @@ class MiddlewareRequests(models.Model):
     runtime = models.DateTimeField(auto_now_add=True)
     priority = models.IntegerField("Priority", default=0)
 
-
     class Meta:
         ordering = ['priority', 'runtime']
 

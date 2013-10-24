@@ -2,7 +2,7 @@ import re
 import uuid
 
 from django.forms.widgets import MultiWidget, to_current_timezone
-from django.forms.widgets import DateTimeInput, Media
+from django.forms.widgets import DateTimeInput
 from datetime import datetime
 from django.utils.safestring import mark_safe
 
@@ -53,14 +53,11 @@ dateConversion = {
 
 
 class DateTimeWidget(MultiWidget):
-
-
     class Media:
         css = dict(all=('css/bootstrap.min.css', 'css/datetimepicker.css'))
         js = ('js/jquery_1_9_1_.min.js',
               'js/bootstrap.min.js',
-              'js/bootstrap-datetimepicker.js',
-        )
+              'js/bootstrap-datetimepicker.js',)
 
     def __init__(self, attrs=None, options=None):
         if attrs is None:
@@ -121,20 +118,20 @@ Returns a Unicode string representing the HTML for the whole lot.
 
         js_options = datetimepicker_options % self.option
         id = uuid.uuid4().hex
-        return '<div id="%s" class="input-append date form_datetime">'\
-               '%s'\
-               '<span class="add-on"><i class="icon-th"></i></span>'\
-               '</div>'\
-               '<script type="text/javascript">'\
-               '$("#%s").datetimepicker({%s});'\
+        return '<div id="%s" class="input-append date form_datetime">' \
+               '%s' \
+               '<span class="add-on"><i class="icon-th"></i></span>' \
+               '</div>' \
+               '<script type="text/javascript">' \
+               '$("#%s").datetimepicker({%s});' \
                '</script> ' % (id, rendered_widgets[0], id, js_options)
 
     def render(self, name, value, attrs=None):
         if self.is_localized:
             for widget in self.widgets:
                 widget.is_localized = self.is_localized
-        # value is a list of values, each corresponding to a widget
-        # in self.widgets.
+                # value is a list of values, each corresponding to a widget
+            # in self.widgets.
         if not isinstance(value, list):
             value = self.decompress(value)
         output = []
@@ -149,4 +146,3 @@ Returns a Unicode string representing the HTML for the whole lot.
 
         output.append(self.widgets[0].render(name, widget_value, final_attrs))
         return mark_safe(self.format_output(output))
-
