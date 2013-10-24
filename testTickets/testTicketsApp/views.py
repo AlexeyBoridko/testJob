@@ -34,14 +34,19 @@ def main_edit_update(request, item_id):
         context = dict({'user_info': item})
     except (KeyError, UserInfo.DoesNotExist):
         template = 'testTicketsApp/errors.html'
-        context = dict({'errormessage': 'Edit: UserInfo by id %s - not hound' % item_id})
+        context = dict({'error_message': 'Edit: UserInfo by id %s - not hound' % item_id})
     else:
         form = UserInfoForm(request.POST or None, request.FILES or None, instance=item)
         context.update({'form': form})
         request_method = request.method
-        if (request_method == 'POST' and request.is_ajax()) or request_method == 'POST':
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(reverse('update', kwargs={'item_id': item_id}))
+
+        if request_method == 'POST':
+            if request.is_ajax():
+                if form.is_valid():
+                    form.save()
+                    return HttpResponseRedirect(reverse('update', kwargs={'item_id': item_id}))
+            else:
+                template = 'testTicketsApp/errors.html'
+                context = dict({'error_message': 'Update user contact info: Post is not ajax'})
 
     return render(request, template, context)

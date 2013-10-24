@@ -125,6 +125,15 @@ class SimpleTest(TestCase):
         ui_changed_email = UserInfo.objects.get(pk=item_id)
         self.assertEqual(ui_changed_email.email, ui["email"])
 
+        #Checking if post is not ajax. Wrong case
+        #put new correct data
+        ui["email"] = "testalexeybor@mail.com"
+        #Make post
+        client.post(reverse('update', kwargs={'item_id': item_id}), ui)
+        item = UserInfo.objects.get(pk=item_id)
+        self.assertNotEqual(item.email, "testalexeybor@mail.com")
+        self.assertEqual(item.email, "alexeybor@mail.com")
+
     def test_tag_edit_admin_(self):
         client = Client()
         response = client.get(reverse('main'))
