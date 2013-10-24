@@ -178,5 +178,10 @@ th.header {
     clear:both;
     height: 10px;
 }
+.photo{
+    width :250px;
+    height:330px;
+    border: 1px;
+}
 
 

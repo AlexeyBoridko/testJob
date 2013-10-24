@@ -37,7 +37,7 @@
             <div>
                 {{ form.photo.label_tag }}
                 {% if user_info.photo%}
-                    <img src="{{ user_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
+                    <img src="{{ user_info.photo.url }}" alt="My uploaded photo" class="photo">
                 {% else %}
                     <div class="no-photo-view">Photo was not uploaded yet</div>
                 {% endif %}

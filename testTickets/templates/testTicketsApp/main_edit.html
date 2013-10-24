@@ -13,41 +13,6 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-     <script type="text/javascript">
-        $(document).ready(function(){
-{#            $("#submit_status").text("");#}
-{#            $('#progress').hide();#}
-
-            function showProgress() {
-                $("form input, form textarea").prop('disabled', 'disabled');
-                $('#progress').show();
-            }
-
-            function ajaxSuccess(){
-                $("form input, form textarea").removeProp('disabled');
-                $("#submit_status").text("Changes have been saved");
-                $('#progress').hide();
-            }
-
-            function ajaxError(){
-                $("#submit_status").text("Update error");
-            }
-
-            var options = {
-                target: $('body'),
-                beforeSubmit: showProgress,
-                success: ajaxSuccess,
-                error:ajaxError
-            };
-
-            $('#formid').submit(function() {
-                $(this).ajaxSubmit(options);
-                return false;
-            });
-        });
-    </script>
-
-
     <div id="progress" class="progress">
         <img  src="{% static "img/progress.gif" %}" alt="Progress..." />
     </div>
@@ -78,7 +43,7 @@
                 <div class="field">
                     <label></label>
                     {% if user_info.photo%}
-                        <img src="{{ user_info.photo.url }}" alt="My uploaded photo" width="250px" height="330px" border="1px">
+                        <img src="{{ user_info.photo.url }}" alt="My uploaded photo" class="photo">
                     {% else %}
                         <div class="no-photo-edit">Photo was not uploaded yet</div>
                     {% endif %}

@@ -21,7 +21,7 @@ class UserInfoForm(forms.ModelForm):
 
     class Media:
         css = dict(all=('css/style.css',))
-        js = ("js/jquery.form.js",)
+        js = ("js/jquery.form.js", 'js/main_edit_post.js',)
 
 
 class RequestsForm(forms.ModelForm):
@@ -30,5 +30,4 @@ class RequestsForm(forms.ModelForm):
 
     class Media:
         css = dict(all=('css/style.css',))
-        js = ('js/jquery.latest.js', 'js/jquery.tablesorter.min.js')
-
+        js = ('js/jquery.latest.js', 'js/jquery.tablesorter.min.js', 'js/requests_table_sorter_config.js',)
